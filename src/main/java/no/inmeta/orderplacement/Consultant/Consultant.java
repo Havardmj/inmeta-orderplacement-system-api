@@ -50,7 +50,7 @@ public class Consultant {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailAddress = emailAddress;
+        this.emailAddress = emailAddress.toLowerCase();
         this.consultantPassword = userPassword;
         this.phoneNumber = phoneNumber;
         this.consultantAdded = LocalDate.now();
@@ -59,7 +59,7 @@ public class Consultant {
     public Consultant(String firstName, String lastName, String emailAddress, String userPassword, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailAddress = emailAddress;
+        this.emailAddress = emailAddress.toLowerCase();
         this.consultantPassword = userPassword;
         this.phoneNumber = phoneNumber;
         this.consultantAdded = LocalDate.now();

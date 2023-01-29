@@ -4,7 +4,9 @@ package no.inmeta.orderplacement.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import no.inmeta.orderplacement.Dto.ConsultantOrderDto;
+import no.inmeta.orderplacement.Consultant.FindConsultant;
+import no.inmeta.orderplacement.dto.LoginService;
+import no.inmeta.orderplacement.dto.OrderDto;
 import no.inmeta.orderplacement.order.AddOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,9 @@ import java.util.UUID;
 @RequestMapping("/order")
 public class OrderController {
 
-    private final ConsultantOrderDto consultantOrderPlacement;
+    private final OrderDto orderDto;
+
+    private final LoginService loginService;
 
     private final ObjectMapper objectMapper;
 
@@ -29,8 +33,13 @@ public class OrderController {
 
     @Transactional
     @PostMapping("/register-order")
-    public ResponseEntity<?> registerAOrderTransaction(@RequestBody AddOrder addOrder) {
-        consultantOrderPlacement.addConsultantOrder(addOrder);
+    public ResponseEntity<?> registerAOrderTransaction(
+            @RequestBody AddOrder addOrder,
+            @RequestHeader(value = "email-address", required = true) String loginEmail,
+            @RequestHeader(value = "password", required = true) String loginPassword
+    ) {
+        loginService.findSalesRepresentative(loginEmail, loginPassword);
+        orderDto.addConsultantOrder(addOrder);
         return new ResponseEntity<>(HttpStatus.valueOf(200));
     }
 
@@ -40,9 +49,20 @@ public class OrderController {
     }
 
     @GetMapping("/find-all-order-consultant")
-    public ResponseEntity<?> getAllOrderConsultant(@RequestBody UUID consultantId) {
+    public ResponseEntity<?> getAllOrderConsultant(
+            @RequestBody FindConsultant findConsultant,
+            @RequestHeader(value = "email-address", required = false) String loginEmail,
+            @RequestHeader(value = "password", required = false) String loginPassword
+    ) {
+        log.info("test");
+        loginService.findSalesRepresentative(loginEmail, loginPassword);
         return new ResponseEntity<>(
-                consultantOrderPlacement.findAllConsultantOrders(consultantId), HttpStatus.valueOf(200)
+                orderDto.findAllConsultantOrders(
+                        UUID.fromString(
+                                findConsultant.getConsultantId()
+                        )
+                ),
+                HttpStatus.valueOf(200)
         );
     }
 }

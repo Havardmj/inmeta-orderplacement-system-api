@@ -1,4 +1,4 @@
-package no.inmeta.orderplacement.Dto;
+package no.inmeta.orderplacement.dto;
 
 
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class ConsultantOrderDto {
+public class OrderDto {
 
     private final OrderRepository orderRepository;
 
