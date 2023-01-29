@@ -2,6 +2,7 @@ package no.inmeta.orderplacement;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import no.inmeta.orderplacement.Consultant.Consultant;
 import no.inmeta.orderplacement.order.*;
 
 import java.time.LocalDate;
@@ -58,7 +59,40 @@ public class TestData {
                 "333 44 555",
                 "test@testclass.com",
                 "storgata 4",
-                "storgata 40", TypeOfService.CLEANING
+                "storgata 40",
+                TypeOfService.CLEANING
+        );
+    }
+
+    public static Consultant addConsultant() {
+        return new Consultant(
+                "Bjørn Stjerne",
+                "Bjørnson",
+                "bjorn@testdata.com",
+                "bjorn2023",
+                "+4744556677"
+        );
+    }
+
+    public static Consultant addConsultantPredefinedConsultantEmailAndPassword(String emailAddress, String password) {
+        return new Consultant(
+                A_CONSULTANT_TEST_ID,
+                "Bjørn Stjerne",
+                "Bjørnson",
+                emailAddress,
+                password,
+                "+4744556677"
+        );
+    }
+
+    public static Consultant addConsultantPredefinedConsultantId(UUID id) {
+        return new Consultant(
+                A_CONSULTANT_TEST_ID,
+                "Bjørn Stjerne",
+                "Bjørnson",
+                "bjorn@testdata.com",
+                "bjorn2023",
+                "+4744556677"
         );
     }
 }

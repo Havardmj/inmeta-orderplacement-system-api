@@ -33,8 +33,35 @@ public class Consultant {
 
     private String emailAddress;
 
+    private String consultantPassword;
+
     private String phoneNumber;
 
-    private LocalDate consultant_added;
+    private LocalDate consultantAdded;
 
+    public Consultant(
+            UUID id,
+            String firstName,
+            String lastName,
+            String emailAddress,
+            String userPassword,
+            String phoneNumber
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.consultantPassword = userPassword;
+        this.phoneNumber = phoneNumber;
+        this.consultantAdded = LocalDate.now();
+    }
+
+    public Consultant(String firstName, String lastName, String emailAddress, String userPassword, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.consultantPassword = userPassword;
+        this.phoneNumber = phoneNumber;
+        this.consultantAdded = LocalDate.now();
+    }
 }

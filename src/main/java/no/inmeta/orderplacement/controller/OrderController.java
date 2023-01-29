@@ -4,7 +4,7 @@ package no.inmeta.orderplacement.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import no.inmeta.orderplacement.consultantOrderDto.ConsultantOrderDto;
+import no.inmeta.orderplacement.Dto.ConsultantOrderDto;
 import no.inmeta.orderplacement.order.AddOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

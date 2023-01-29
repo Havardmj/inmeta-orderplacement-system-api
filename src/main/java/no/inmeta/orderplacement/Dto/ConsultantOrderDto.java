@@ -1,4 +1,4 @@
-package no.inmeta.orderplacement.consultantOrderDto;
+package no.inmeta.orderplacement.Dto;
 
 
 import lombok.RequiredArgsConstructor;

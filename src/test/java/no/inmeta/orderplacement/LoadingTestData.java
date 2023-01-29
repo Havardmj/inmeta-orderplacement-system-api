@@ -3,6 +3,7 @@ package no.inmeta.orderplacement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import no.inmeta.orderplacement.order.Order;
+import no.inmeta.orderplacement.repository.ConsultantRepository;
 import no.inmeta.orderplacement.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -17,16 +18,27 @@ import org.springframework.stereotype.Component;
 public class LoadingTestData implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
-    public void LoadTestData() {
+    @Autowired
+    private ConsultantRepository consultantRepository;
+
+    public void loadTestData() {
+        loadOrderTestData();
+    }
+
+    public void loadOrderTestData() {
         orderRepository.save(TestData.oneConsultantTestOrder());
         orderRepository.save(new Order(TestData.aAddDetailTestCase()));
     }
 
+    public void loadConsultantData() {
+        consultantRepository.save(TestData.addConsultantPredefinedConsultantId(TestData.A_CONSULTANT_TEST_ID));
+    }
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        event.getApplicationContext().getBean(LoadingTestData.class).LoadTestData();
+        event.getApplicationContext().getBean(LoadingTestData.class).loadTestData();
 
     }
 }
